@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A gallery of ash-ysand's 3D models in Roblox.">
+	<title>ash-ysand gallery</title>
+	<link rel="icon" type="image/x-icon" href="./imgs/favicon.png">
+	<link rel="stylesheet" href="assets/css/gallery.css">
+</head>
+
+<body class="gallery-page">
+	<main class="gallery-page-content">
+		<header class="gallery-page-hero">
+			<p class="gallery-brand">ash-ysand gallery <span>◆</span></p>
+			<p class="gallery-eyebrow">3D accessories and more to come!</p>
+			<h1>character assets</h1>
+			<p class="gallery-page-intro">my roblox marketplace creations ♡ please favorite!</p>
+		</header>
+
+		<section class="gallery-bundles">
+			<article class="gallery-bundle" data-bundle>
+				<header class="gallery-bundle-header">
+					<div>
+						<p class="gallery-eyebrow">bundle 01</p>
+						<h2>witch hat</h2>
+						<p class="gallery-bundle-description">a cute witch hat with a gold metal brim and pumpkins</p>
+					</div>
+					<p class="gallery-bundle-count">1 / 2</p>
+				</header>
+
+				<div class="gallery-bundle-carousel">
+					<div class="gallery-bundle-controls" role="group">
+						<button class="gallery-carousel-button" type="button" data-carousel-step="-1">
+							<span>&larr;</span>
+						</button>
+						<button class="gallery-carousel-button" type="button" data-carousel-step="1">
+							<span>&rarr;</span>
+						</button>
+					</div>
+					<div class="gallery-bundle-track" tabindex="0">
+						<figure class="gallery-bundle-slide gallery-bundle-slide--placeholder" aria-hidden="true">
+							<div class="gallery-artwork-placeholder">
+								<img src="./imgs/gallery-placeholder-left.PNG" alt="">
+							</div>
+						</figure>
+						<figure class="gallery-bundle-slide">
+							<button class="gallery-artwork-button" type="button"
+								data-artwork-title="cute black witch hat"
+								data-artwork-description="a cute black witch hat featuring with gold metal brim and pumpkins."
+								data-artwork-url="https://www.roblox.com/catalog/86906918995646">
+								<img src="./imgs/gallery-art-01.png" alt="low-poly black witch hat with a gold brim and pumpkins" loading="lazy">
+								<span class="gallery-zoom-hint">details</span>
+							</button>
+							<figcaption>cute black witch hat</figcaption>
+						</figure>
+						<figure class="gallery-bundle-slide">
+							<button class="gallery-artwork-button" type="button"
+								data-artwork-title="cute white witch hat"
+								data-artwork-description="a cute white witch hat with a gold metal brim and pumpkins."
+								data-artwork-url="https://www.roblox.com/catalog/124491421753123">
+								<img src="./imgs/gallery-art-02.png" alt="low-poly white witch hat with a gold brim and pumpkins" loading="lazy">
+								<span class="gallery-zoom-hint">details</span>
+							</button>
+							<figcaption>cute white witch hat</figcaption>
+						</figure>
+						<figure class="gallery-bundle-slide gallery-bundle-slide--placeholder" aria-hidden="true">
+							<div class="gallery-artwork-placeholder">
+								<img src="./imgs/gallery-placeholder-right.PNG" alt="">
+							</div>
+						</figure>
+					</div>
+				</div>
+			</article>
+		</section>
+	</main>
+
+	<dialog class="gallery-lightbox">
+		<div class="gallery-lightbox-content">
+			<button class="lightbox-close" type="button">&times;</button>
+			<div class="lightbox-image-area">
+				<button class="lightbox-nav lightbox-previous" type="button">&larr;</button>
+				<img class="lightbox-image" alt="">
+				<button class="lightbox-nav lightbox-next" type="button">&rarr;</button>
+			</div>
+			<aside class="lightbox-details">
+				<p class="gallery-eyebrow">witch hat</p>
+				<h2 id="lightbox-title"></h2>
+				<p class="lightbox-description"></p>
+				<a class="lightbox-tryon" target="_blank" rel="noopener noreferrer">try it on in roblox</a>
+				<p class="lightbox-counter"></p>
+			</aside>
+		</div>
+	</dialog>
+
+	<script src="assets/js/gallery.js" defer></script>
+</body>
+</html>
