@@ -35,14 +35,14 @@ button {
 .gallery-page-content {
 	width: min(100% - 2rem, 74rem);
 	margin: 0 auto;
-	padding: clamp(2rem, 7vw, 5.5rem) 0 5rem;
+	padding: clamp(1rem, 4vw, 3rem) 0 5rem;
 }
 
 .gallery-page-hero {
 	position: relative;
-	max-width: 62rem;
+	max-width: 50rem;
 	margin: 0 auto 3rem;
-	padding: clamp(1.5rem, 5vw, 3.75rem);
+	padding: clamp(1rem, 3.5vw, 2.5rem);
 	overflow: hidden;
 	border: 3px solid #26394d;
 	border-radius: 0.65rem;
@@ -63,7 +63,7 @@ button {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.6rem;
-	margin: 0 0 2.4rem;
+	margin: 0 0 0.75rem;
 	padding: 0.55rem 0.8rem;
 	border: 2px solid #26394d;
 	border-radius: 0.35rem;
@@ -93,15 +93,19 @@ button {
 	max-width: 12ch;
 	margin: 0;
 	color: #202c3b;
-	font-size: clamp(2.8rem, 8vw, 5.8rem);
+	font-size: clamp(2.25rem, 6vw, 4.5rem);
 	font-weight: 900;
 	letter-spacing: -0.065em;
 	line-height: 0.98;
 }
 
+.gallery-page-hero .gallery-eyebrow {
+	margin-bottom: 0.35rem;
+}
+
 .gallery-page-intro {
 	max-width: 40rem;
-	margin: 1.2rem 0 0;
+	margin: 0.65rem 0 0;
 	color: #c3cbd4;
 	font-size: clamp(1rem, 2vw, 1.15rem);
 	font-weight: 600;
@@ -114,6 +118,7 @@ button {
 }
 
 .gallery-bundle {
+	position: relative;
 	padding: clamp(1rem, 3.4vw, 2rem);
 	overflow: hidden;
 	border: 3px solid #26394d;
@@ -127,11 +132,11 @@ button {
 	align-items: flex-end;
 	justify-content: space-between;
 	gap: 1rem;
-	margin-bottom: 1.35rem;
+	margin-bottom: 0.75rem;
 }
 
 .gallery-bundle-header .gallery-eyebrow {
-	margin-bottom: 0.4rem;
+	margin-bottom: 0.2rem;
 }
 
 .gallery-bundle-header h2 {
@@ -144,15 +149,16 @@ button {
 
 .gallery-bundle-description {
 	max-width: 42rem;
-	margin: 0.55rem 0 0;
+	margin: 0.3rem 0 0;
 	color: #c3cbd4;
 	font-weight: 600;
 	line-height: 1.65;
 }
 
 .gallery-bundle-count {
-	flex: 0 0 auto;
-	margin: 0 0 0.3rem;
+	position: absolute;
+	top: calc(clamp(1rem, 3.4vw, 2rem) + 3px);
+	right: calc(clamp(1rem, 3.4vw, 2rem) + 3px);
 	padding: 0.5rem 0.7rem;
 	border: 2px solid #26394d;
 	border-radius: 0.35rem;
@@ -188,11 +194,11 @@ button {
 .gallery-bundle-track {
 	display: grid;
 	width: 100%;
-	grid-auto-columns: min(28rem, 78vw);
+	grid-auto-columns: min(18rem, 70vw);
 	grid-auto-flow: column;
 	gap: 1rem;
 	overflow-x: auto;
-	padding: 0.25rem max(0px, calc((100% - min(28rem, 78vw)) / 2)) 1rem;
+	padding: 0.25rem max(0px, calc((100% - min(18rem, 70vw)) / 2)) 1rem;
 	overscroll-behavior-inline: contain;
 	scroll-snap-type: inline mandatory;
 	scrollbar-width: none;
@@ -235,7 +241,7 @@ button {
 	height: 100%;
 	object-fit: contain;
 	object-position: center;
-	transition: transform 220ms ease;
+	transition: transform 350ms ease;
 }
 
 .gallery-artwork-button:hover img,
@@ -350,12 +356,38 @@ button {
 	background: #17202b;
 	color: #f9fafb;
 	box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
+	opacity: 0;
+	transform: translateY(0.75rem) scale(0.98);
+	transition: opacity 140ms ease, transform 140ms ease, display 140ms allow-discrete, overlay 140ms allow-discrete;
+}
+
+.gallery-lightbox[open] {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+@starting-style {
+	.gallery-lightbox[open] {
+		opacity: 0;
+		transform: translateY(0.75rem) scale(0.98);
+	}
 }
 
 .gallery-lightbox::backdrop {
 	background: rgba(8, 12, 18, 0.9);
 	-webkit-backdrop-filter: blur(5px);
 	backdrop-filter: blur(5px);
+	transition: opacity 140ms ease;
+}
+
+.gallery-lightbox[open]::backdrop {
+	opacity: 1;
+}
+
+@starting-style {
+	.gallery-lightbox[open]::backdrop {
+		opacity: 0;
+	}
 }
 
 .gallery-lightbox-content {
@@ -410,6 +442,17 @@ button {
 .lightbox-details {
 	align-self: center;
 	padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.gallery-lightbox.has-scroll-reveal .lightbox-details {
+	opacity: 0;
+	transform: translateY(1rem);
+	transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.gallery-lightbox.has-scroll-reveal .lightbox-details.is-visible {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 .lightbox-details .gallery-eyebrow {
@@ -494,7 +537,7 @@ button {
 
 @media (max-width: 700px) {
 	.gallery-page-content {
-		padding-top: 1.5rem;
+		padding-top: 1rem;
 	}
 
 	.gallery-page-hero {
@@ -502,7 +545,7 @@ button {
 	}
 
 	.gallery-brand {
-		margin-bottom: 1.8rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.gallery-bundle-header {
@@ -511,8 +554,8 @@ button {
 
 	.gallery-bundle-track {
 		width: 100%;
-		grid-auto-columns: min(28rem, 78vw);
-		padding-inline: max(0px, calc((100% - min(28rem, 78vw)) / 2));
+		grid-auto-columns: min(18rem, 70vw);
+		padding-inline: max(0px, calc((100% - min(18rem, 70vw)) / 2));
 	}
 
 	.gallery-lightbox {
@@ -562,14 +605,25 @@ button {
 		scroll-behavior: auto;
 	}
 
+	.gallery-lightbox,
+	.gallery-lightbox::backdrop {
+		transition: none;
+	}
+
 	.gallery-artwork-button img,
 	.gallery-zoom-hint,
-	.gallery-carousel-button {
+	.gallery-carousel-button,
+	.gallery-lightbox.has-scroll-reveal .lightbox-details {
 		transition: none;
 	}
 
 	.gallery-artwork-button:hover img,
 	.gallery-artwork-button:focus-visible img {
+		transform: none;
+	}
+
+	.gallery-lightbox.has-scroll-reveal .lightbox-details {
+		opacity: 1;
 		transform: none;
 	}
 }

@@ -5,8 +5,10 @@ const lightboxTitle = lightbox.querySelector("#lightbox-title");
 const lightboxDescription = lightbox.querySelector(".lightbox-description");
 const lightboxTryon = lightbox.querySelector(".lightbox-tryon");
 const lightboxCounter = lightbox.querySelector(".lightbox-counter");
+const lightboxDetails = lightbox.querySelector(".lightbox-details");
 let activeBundleArtworks = [];
 let activeArtworkIndex = 0;
+let lightboxDetailsObserver;
 
 function showArtwork(index) {
 	activeArtworkIndex = (index + activeBundleArtworks.length) % activeBundleArtworks.length;
@@ -95,12 +97,34 @@ document.querySelectorAll(".gallery-artwork-button").forEach((button) => {
 		activeBundleArtworks = Array.from(button.closest("[data-bundle]").querySelectorAll(".gallery-artwork-button"));
 		showArtwork(activeBundleArtworks.indexOf(button));
 		lightbox.showModal();
+		lightboxDetails.classList.remove("is-visible");
+		lightbox.classList.add("has-scroll-reveal");
+
+		if ("IntersectionObserver" in window) {
+			lightboxDetailsObserver = new IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting) {
+					lightboxDetails.classList.add("is-visible");
+					lightboxDetailsObserver.disconnect();
+				}
+			}, {
+				root: lightbox,
+				threshold: 0.15
+			});
+			lightboxDetailsObserver.observe(lightboxDetails);
+		} else {
+			lightboxDetails.classList.add("is-visible");
+		}
 	});
 });
 
 lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
 lightbox.querySelector(".lightbox-previous").addEventListener("click", () => showArtwork(activeArtworkIndex - 1));
 lightbox.querySelector(".lightbox-next").addEventListener("click", () => showArtwork(activeArtworkIndex + 1));
+lightbox.addEventListener("close", () => {
+	lightboxDetails.classList.remove("is-visible");
+	lightbox.classList.remove("has-scroll-reveal");
+	lightboxDetailsObserver?.disconnect();
+});
 
 lightbox.addEventListener("click", (event) => {
 	if (event.target === lightbox) {
